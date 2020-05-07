@@ -16,7 +16,7 @@ class CreateGenresTable extends Migration
         Schema::create('genres', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->string('name', 255);
-            $table->boolean("is_active");
+            $table->boolean("is_active")->default(true);
             $table->softDeletes();
             $table->timestamps();
         });
