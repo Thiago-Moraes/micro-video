@@ -30,6 +30,18 @@ class TestCategory extends TestCase
         $response->assertJson($category->toArray());
     }
 
+    public function testInvalidationDelete()
+    {
+        $response = $this->json("DELETE", route("categories.destroy", ["category" => 'a']));
+        $response->assertNotFound();
+
+        $category = factory(Category::class)->create();
+        $this->json("DELETE", route("categories.destroy", ['category' => $category->id]));
+        
+        $this->json("DELETE", route("categories.destroy", ['category' => $category->id]));
+        $response->assertSee("No query results for model");
+    }
+
     public function testInvalidationName()
     {
 

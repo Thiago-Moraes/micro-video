@@ -32,6 +32,18 @@ class TestGenre extends TestCase
         $response->assertJson($genres->toArray());
     }
 
+    public function testInvalidationDelete()
+    {
+        $response = $this->json("DELETE", route("genres.destroy", ["genre" => 'a']));
+        $response->assertNotFound();
+
+        $genre = factory(Genre::class)->create();
+        $this->json("DELETE", route("genres.destroy", ['genre' => $genre->id]));
+        
+        $this->json("DELETE", route("genres.destroy", ['genre' => $genre->id]));
+        $response->assertSee("No query results for model");
+    }
+
     public function testInvalidationName()
     {
 
