@@ -28,13 +28,4 @@ class GenreRequest extends FormRequest
             'is_active' => 'boolean'
         ];
     }
-
-    public function messages()
-    {
-        return [
-            'name.request' => 'O campo nome é obrigatório.',
-            'name.max' => 'O campo nome não pode ter mais de 255 caracteres.',
-            'is_active' => 'Tipo de dado não permitido.'
-        ];
-    }
 }
